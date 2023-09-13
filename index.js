@@ -9,13 +9,14 @@ const AuthRoute = require("./routes/AuthRoute");
 const TasksRoute = require("./routes/TasksRoute");
 
 const username = "amrithshagar20";
-const password = "Amrith2000@mongodb"; // Provide the raw password
+const password = "Amrith2000"; // Provide the raw password
 const clusterName = "clusteridealize";
 const databaseName = "idealize_data";
 
-const uri = `mongodb+srv://${username}:${encodeURIComponent(
-  password
-)}@${clusterName}.sncus4j.mongodb.net/${databaseName}?retryWrites=true&w=majority`;
+const uri = process.env.MONGODB_URI;
+// const uri = `mongodb+srv://${username}:${encodeURIComponent(
+//   password
+// )}@${clusterName}.sncus4j.mongodb.net/${databaseName}?retryWrites=true&w=majority`;
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
@@ -33,11 +34,10 @@ db.once("open", (err) => {
 const app = express();
 
 app.use(morgan("dev"));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 app.use(cors({ origin: true, credentials: true }));
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 const PORT = process.env.PORT || 4000;
 
 app.use(function (req, res, next) {
