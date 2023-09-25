@@ -7,6 +7,7 @@ const cors = require("cors");
 const UserRoute = require("./routes/UserRoute");
 const AuthRoute = require("./routes/AuthRoute");
 const TasksRoute = require("./routes/TasksRoute");
+const NewHabitRoute = require("./routes/NewHabitRoute");
 
 const username = "amrithshagar20";
 const password = "Amrith2000"; // Provide the raw password
@@ -64,4 +65,5 @@ app.get("/", (req, res) => {
 app.use("/api/UserRoute", UserRoute);
 app.use("/api", AuthRoute);
 app.use("/api/TasksRoute", TasksRoute);
+app.use("/api/NewHabitRoute", NewHabitRoute);
 module.exports = app;
