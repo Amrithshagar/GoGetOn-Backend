@@ -28,6 +28,24 @@ const saveNewHabit = (req,res,next)=>{
         });
 };
 
+const indexHabit = (req,res,next)=>{
+    NewHabit.find()
+        .then((response)=>{
+            res.join({
+                response,
+                message: "Fetched Habits successfully",
+            });
+        })
+        .catch((error)=>{
+            console.log("Error fetching Habits:", error);
+            res.status(500).json({
+                message: "An error occurred while fetching the tasks.",
+                error: error.message,
+            });
+        });
+};
+
 module.exports = {
     saveNewHabit,
+    indexHabit,
 };
