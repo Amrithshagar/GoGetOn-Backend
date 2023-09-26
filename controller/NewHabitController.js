@@ -22,7 +22,7 @@ const saveNewHabit = (req,res,next)=>{
         .catch((error)=>{
             console.error("Error in Adding Habits: ", error);
             res.status(500).json({
-                message: "An error occurred while adding the tasks.",
+                message: "An error occurred while adding the Habit.",
                 error: error.message,
             });
         });
@@ -31,7 +31,7 @@ const saveNewHabit = (req,res,next)=>{
 const indexHabit = (req,res,next)=>{
     NewHabit.find()
         .then((response)=>{
-            res.join({
+            res.json({
                 response,
                 message: "Fetched Habits successfully",
             });
