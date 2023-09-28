@@ -45,7 +45,32 @@ const indexHabit = (req,res,next)=>{
         });
 };
 
+const deleteHabit = (req, res, next) => {
+    const habitId = req.params.id;
+  
+    // Use mongoose to find and remove the habit by its ID
+    NewHabit.findByIdAndRemove(habitId)
+      .then((response) => {
+        if (!response) {
+          return res.status(404).json({
+            message: "Habit not found",
+          });
+        }
+        res.json({
+          message: "Habit deleted successfully",
+        });
+      })
+      .catch((error) => {
+        console.error("Error deleting Habit: ", error);
+        res.status(500).json({
+          message: "An error occurred while deleting the Habit.",
+          error: error.message,
+        });
+      });
+  };
+
 module.exports = {
     saveNewHabit,
     indexHabit,
+    deleteHabit,
 };
